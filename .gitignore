@@ -23,6 +23,11 @@ build/
 outputs/*
 !outputs/.gitkeep
 
+# Local uploaded source files
+uploads/*
+!uploads/mes/
+!uploads/mes/.gitkeep
+
 # OS / editor
 .DS_Store
 .idea/

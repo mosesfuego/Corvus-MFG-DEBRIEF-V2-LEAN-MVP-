@@ -2,9 +2,11 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from fastapi import APIRouter
+from fastapi import APIRouter, File, HTTPException, UploadFile
 
 from app.ingest.csv_loader import load_production_jobs
+from app.ingest.mock_mes_socket import load_mock_mes_export
+from app.ingest.upload_store import save_mes_upload, save_upload_context
 
 router = APIRouter()
 
@@ -31,4 +33,33 @@ def sample_jobs() -> dict[str, object]:
             }
             for job in jobs
         ],
+    }
+
+
+@router.post("/mes/uploads")
+async def upload_mes_csv(file: UploadFile = File(...)) -> dict[str, object]:
+    try:
+        saved_upload = save_mes_upload(
+            filename=file.filename or "upload.csv",
+            content=await file.read(),
+        )
+    except ValueError as error:
+        raise HTTPException(status_code=400, detail=str(error)) from error
+
+    try:
+        bundle = load_mock_mes_export(saved_upload.stored_path)
+        context = bundle.to_llm_context()
+        save_upload_context(saved_upload, context)
+    except Exception as error:
+        raise HTTPException(
+            status_code=422,
+            detail=f"Upload was saved, but MES context generation failed: {error}",
+        ) from error
+
+    return {
+        **saved_upload.to_dict(),
+        "table_counts": bundle.table_counts,
+        "normalized_job_count": len(bundle.production_jobs),
+        "manufacturing_event_count": len(bundle.manufacturing_events),
+        "warnings": bundle.warnings,
     }
