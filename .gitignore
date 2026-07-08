@@ -20,8 +20,7 @@ build/
 !.env.example
 
 # Local generated output
-outputs/*.json
-outputs/*.md
+outputs/*
 !outputs/.gitkeep
 
 # OS / editor
