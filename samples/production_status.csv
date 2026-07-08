@@ -1,0 +1,4 @@
+job_id,part_number,customer,build_goal,due_date,quantity_required,quantity_completed,current_step,status,owner,blocker_reason,last_updated,estimated_cycle_time_days,trained_technicians_available,priority,previous_step,previous_status,promised_ship_date
+1047,GDC54,Internal,Build 5 ABCD units,2026-07-10,5,0,Receiving Inspection,Blocked,Receiving Team,Awaiting inspection disposition,2026-07-07,1,2,High,Receiving Dock,On Track,2026-07-10
+1052,MXP11,Apex Aero,Ship replacement actuator batch,2026-07-08,20,8,Final Assembly,At Risk,Assembly Lead,,2026-07-07,3,1,Critical,Subassembly,At Risk,2026-07-08
+1055,TRQ90,Northline,Complete torque bracket run,2026-07-06,50,42,Quality Review,Late,Quality Team,First article report pending,2026-07-05,1,2,High,Quality Review,At Risk,2026-07-06
