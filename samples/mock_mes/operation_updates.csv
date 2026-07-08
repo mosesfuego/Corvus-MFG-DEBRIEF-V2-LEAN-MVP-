@@ -1,0 +1,4 @@
+Work Order,Operation,Work Center,Queue Position,Last Activity,Operator,Notes
+WO-1047,Receiving Inspection,RI-01,1,2026-07-07,J. Ramos,Waiting on disposition
+WO-1052,Final Assembly,ASM-02,3,2026-07-07,K. Singh,One trained operator available
+WO-1055,Quality Review,QA-01,2,2026-07-05,M. Lee,FAI package not released

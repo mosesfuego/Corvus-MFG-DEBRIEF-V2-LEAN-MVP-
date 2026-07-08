@@ -1,0 +1,4 @@
+Work Order,Part,Customer,Description,Need Date,Order Qty,Completed Qty,Operation,Status,Department,Hold Reason,Last Activity,Cycle Days,Operators,Priority,Promise Date
+WO-1047,GDC54,Internal,Build 5 ABCD units,2026-07-10,5,0,Receiving Inspection,On Hold,Receiving Team,Awaiting inspection disposition,2026-07-07,1,2,High,2026-07-10
+WO-1052,MXP11,Apex Aero,Ship replacement actuator batch,2026-07-08,20,8,Final Assembly,Expedite,Assembly Lead,,2026-07-07,3,1,Hot,2026-07-08
+WO-1055,TRQ90,Northline,Complete torque bracket run,2026-07-06,50,42,Quality Review,Past Due,Quality Team,First article report pending,2026-07-05,1,2,High,2026-07-06
