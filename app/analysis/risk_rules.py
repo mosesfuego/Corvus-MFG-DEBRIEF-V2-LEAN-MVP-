@@ -22,7 +22,10 @@ def detect_basic_risks(jobs: list[ProductionJob], today: date) -> list[RiskFindi
                     severity=Severity.CRITICAL,
                     owner=job.owner,
                     summary=f"Job {job.job_id} is late.",
-                    evidence=f"Due {job.due_date.isoformat()} with {job.remaining_quantity} units open.",
+                    evidence=(
+                        f"Due {job.due_date.isoformat()} with "
+                        f"{job.remaining_quantity} units open."
+                    ),
                     recommended_action="Confirm recovery date and customer communication plan.",
                     days_to_due=days_to_due,
                     impact="Missed delivery risk is already active.",
@@ -39,10 +42,14 @@ def detect_basic_risks(jobs: list[ProductionJob], today: date) -> list[RiskFindi
                     owner=job.owner,
                     summary=f"Job {job.job_id} is blocked at {job.current_step}.",
                     evidence=job.blocker_reason or "No blocker reason provided.",
-                    recommended_action="Assign an owner to remove the blocker before the next standup.",
+                    recommended_action=(
+                        "Assign an owner to remove the blocker before the next standup."
+                    ),
                     days_to_due=days_to_due,
                     impact="Blocked work can consume remaining schedule buffer.",
-                    questions=[f"What decision or material does {job.owner} need to unblock this job?"],
+                    questions=[
+                        f"What decision or material does {job.owner} need to unblock this job?"
+                    ],
                 )
             )
 
@@ -58,7 +65,9 @@ def detect_basic_risks(jobs: list[ProductionJob], today: date) -> list[RiskFindi
                         f"{job.estimated_cycle_time_days} cycle days estimated with "
                         f"{days_to_due} calendar days to due date."
                     ),
-                    recommended_action="Review expedite options, overtime, or revised ship promise.",
+                    recommended_action=(
+                        "Review expedite options, overtime, or revised ship promise."
+                    ),
                     days_to_due=days_to_due,
                     impact="Work may become late without schedule intervention.",
                     questions=[f"Can {job.owner} reduce cycle time or resequence work today?"],

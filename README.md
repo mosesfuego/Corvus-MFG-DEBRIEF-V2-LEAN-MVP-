@@ -39,6 +39,18 @@ pip install -e ".[dev]"
 pytest
 ```
 
+## Mock MES Ingestion
+
+Place raw mock MES CSV exports in `samples/mock_mes/`, then compile them into an LLM-ready context bundle:
+
+```bash
+python scripts/ingest_mock_mes.py samples/mock_mes \
+  --output outputs/mock_mes_context.json \
+  --prompt-output outputs/mock_mes_prompt.txt
+```
+
+The socket currently uses hard-coded filename and header heuristics to classify CSVs as manufacturing logs, work orders, operations, quality, receiving, inventory, or unknown. Work-order-like rows are normalized into Corvus production jobs. Event-log rows are summarized by job and line. Every raw table is still included as supporting context for the LLM.
+
 ## Demo Principle
 
 Every feature should help answer: **What needs my attention today?**
