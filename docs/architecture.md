@@ -33,3 +33,14 @@ The mock MES socket is deliberately simple for the MVP:
 7. Preserve every raw table as compact context for the LLM.
 
 This keeps the future live-agent path open without building real MES integration infrastructure too early.
+
+## Local Upload Storage
+
+For MVP traceability, uploaded MES CSVs are saved locally under `uploads/mes/`.
+The folder is ignored by git except for `.gitkeep`, because uploaded files may contain
+customer or operational data.
+
+Each upload is stored in a timestamped folder with the original CSV, upload metadata,
+and the generated `context.json` that would be passed downstream to the risk engine
+or LLM. This should later move to durable object storage or a customer-controlled
+data boundary.

@@ -51,6 +51,22 @@ python scripts/ingest_mock_mes.py samples/mock_mes \
 
 The socket currently uses hard-coded filename and header heuristics to classify CSVs as manufacturing logs, work orders, operations, quality, receiving, inventory, or unknown. Work-order-like rows are normalized into Corvus production jobs. Event-log rows are summarized by job and line. Every raw table is still included as supporting context for the LLM.
 
+## Local Upload Traceability
+
+MVP uploads are saved locally under `uploads/mes/` and ignored by git. Each upload gets its own timestamped folder containing:
+
+- the original CSV
+- `metadata.json`
+- `context.json`
+
+The API endpoint is:
+
+```text
+POST /mes/uploads
+```
+
+Use `CORVUS_UPLOAD_DIR` to override the local upload path during testing or demos.
+
 ## Demo Principle
 
 Every feature should help answer: **What needs my attention today?**
